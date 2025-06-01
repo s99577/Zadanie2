@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Weather APP</title>
+    </head>
+    <body>
+        <h1>Wybierz kraj i miasto</h1>
+        <form action="/weather" method="POST">
+            <label for="country">Kraj: </label>
+            <select name="country" id="country" required>
+                {{range $code, $name := .Countries}}
+                    <option value="{{$code}}">{{$name}}</option>
+                {{end}}
+            </select>
+            <br>
+            <label for="city">Miasto: </label>
+            <select name="city" id="city" required>
+            </select>
+            <br>
+            <button type="submit">Pokaż pogodę</button>
+        </form>
+        <script>
+            let citiesByCountry = {{.Cities | toJSON}};
+            console.log(citiesByCountry);  // Dodajemy logowanie
+        
+            function updateCities() {
+                const country = document.getElementById("country").value;
+                const citySelect = document.getElementById("city");
+                citySelect.innerHTML = "";
+                if (citiesByCountry[country]) {
+                    citiesByCountry[country].forEach(function(city) {
+                        const option = document.createElement("option");
+                        option.value = city;
+                        option.textContent = city;
+                        citySelect.appendChild(option);
+                    });
+                }
+            }
+        
+            window.addEventListener("DOMContentLoaded", function() {
+                updateCities();
+                document.getElementById("country").addEventListener("change", updateCities);
+            });
+        </script>
+    </body>
+</html>

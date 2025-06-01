@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>Weather APP</title>
+    </head>
+    <body>
+        <h1>{{.City}} - Aktualna pogoda</h1>
+        {{range .Weather}}
+            <p><strong>Opis: </strong>{{.Description}}</p>
+        {{end}}
+        <p><strong>Temperatura: </strong>{{.Main.Temp}} °C</p>
+        <p><strong>Temperatura odczuwalna: </strong>{{.Main.FeelsLike}} °C</p>
+        <p><strong>Ciśnienie: </strong>{{.Main.Pressure}} hPa</p>
+        <p><strong>Wilgotność: </strong>{{.Main.Humidity}} %</p>
+        <p><strong>Prędkość wiatru: </strong>{{.Wind.Speed}} m/s</p>
+
+        <a href="/">Powrót</a>
+    </body>
+</html>
+    
